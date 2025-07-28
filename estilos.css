@@ -1,1 +1,240 @@
+/* --- Variables de Color y Estilos Base --- */
+:root {
+    --color-fondo: #1a1a2e;
+    --color-fondo-secundario: #16213e;
+    --color-tarjeta: #2e3852;
+    --color-texto: #e0e0e0;
+    --color-texto-secundario: #a0a0c0;
+    --color-primario: #9b59b6; /* Morado principal */
+    --color-aprobado: #27ae60;   /* Verde para aprobado */
+    --color-bloqueado: #454c60; /* Gris oscuro para bloqueado */
+    --fuente-principal: 'Poppins', sans-serif;
+}
 
+body {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 1800px;
+}
+
+/* --- Encabezado y Pie de Página --- */
+header, footer {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 0;
+}
+
+header h2 {
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--color-primario);
+    margin-top: 0;
+}
+
+header p {
+    color: var(--color-texto-secundario);
+}
+
+#reset-button {
+    background-color: #c0392b;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: var(--fuente-principal);
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+#reset-button:hover {
+    background-color: #e74c3c;
+}
+
+/* --- Contenedor de la Malla --- */
+.malla-container {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr); /* 10 columnas para los 10 semestres */
+    gap: 15px;
+    background-color: var(--color-fondo-secundario);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.semestre-columna {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.semestre-titulo {
+    font-weight: 600;
+    text-align: center;
+    color: var(--color-texto-secundario);
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-tarjeta);
+}
+
+/* --- Estilos de los Ramos --- */
+.ramo {
+    background-color: var(--color-tarjeta);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 400;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+    border-left: 4px solid transparent;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ramo:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Estados de los Ramos --- */
+.ramo.disponible {
+    border-left-color: var(--color-primario);
+}
+
+.ramo.aprobado {
+    background-color: var(--color-aprobado);
+    border-left-color: #fff;
+    color: #fff;
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    opacity: 0.9;
+}
+
+.ramo.bloqueado {
+    background-color: var(--color-bloqueado);
+    border-left-color: #7f8c8d;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.ramo.bloqueado:hover {
+    transform: none; /* No hay efecto hover en ramos bloqueados */
+    box-shadow: none;
+}
+
+
+/* --- Alerta de Ramo Bloqueado --- */
+.alerta-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.alerta-container.oculto {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.alerta-contenido {
+    background-color: var(--color-tarjeta);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.alerta-contenido h3 {
+    margin-top: 0;
+    color: var(--color-primario);
+    font-size: 1.5rem;
+}
+
+#lista-requisitos {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+#lista-requisitos li {
+    background-color: var(--color-fondo-secundario);
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+#cerrar-alerta {
+    background-color: var(--color-primario);
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+#cerrar-alerta:hover {
+    background-color: #8e44ad;
+}
+
+
+/* --- Diseño Responsivo --- */
+@media (max-width: 1200px) {
+    .malla-container {
+        grid-template-columns: repeat(5, 1fr); /* 5 columnas en tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .malla-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas en móviles grandes */
+    }
+    .ramo {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    .malla-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en móviles pequeños */
+        padding: 10px;
+    }
+    header h1 {
+        font-size: 2rem;
+    }
+    header h2 {
+        font-size: 1.2rem;
+    }
+}
